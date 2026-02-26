@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useMatches } from "react-router-dom";
 import styled from "@emotion/styled";
 
 // ui
@@ -17,6 +17,10 @@ import ToolBar from "../components/ToolBar";
 import LinkGroup from "../components/LinkGroup";
 import SearchMain from "../components/SearchMain";
 
+interface RouteHandle {
+  title?: string;
+}
+
 export default function Layout() {
   const [mode, setMode] = useState<"board" | "other">("board");
   const [openSearch, setOpenSearch] = useState<boolean>(false);
@@ -24,6 +28,22 @@ export default function Layout() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const firstMount = useRef(true);
+
+  const matches = useMatches();
+
+  useEffect(() => {
+    const last = [...matches]
+      .reverse()
+      .find((m) => (m.handle as RouteHandle | undefined)?.title);
+
+    console.log("last", last);
+
+    if (last) {
+      document.title = `${(last.handle as RouteHandle | undefined)?.title} - 目之所极`;
+    } else {
+      document.title = "目之所极";
+    }
+  }, [matches]);
 
   useEffect(() => {
     const next = isHomePage ? "board" : "other";
