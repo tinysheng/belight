@@ -16,11 +16,12 @@ export const routes: RouteObject[] = [
       {
         index: true,
         element: <Home />,
+        handle: {layout: "board"}
       },
       {
         path: ":pathMatch",
         element: <div> 404 Not Found </div>,
-        handle: { title: "404 Not Found"}
+        handle: { title: "404 Not Found", layout: "other"}
       },
       {
         path: "about",
@@ -29,7 +30,7 @@ export const routes: RouteObject[] = [
             <About />
           </Suspense>
         ),
-        handle: { title: "关于"}
+        handle: { title: "关于", layout: "other"}
       },
       {
         path: "*",
@@ -38,7 +39,7 @@ export const routes: RouteObject[] = [
             <div> 404 Not Found </div>
           </Suspense>
         ),
-        handle: { title: "404 Not Found"}
+        handle: { title: "404 Not Found", layout: "other"}
       },
     ],
   },

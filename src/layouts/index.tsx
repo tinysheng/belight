@@ -1,69 +1,51 @@
-import { useState, useEffect, useRef } from "react";
-import { Outlet, useLocation, useMatches } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Outlet, useMatches } from "react-router-dom";
 import styled from "@emotion/styled";
 
-// ui
-import Surface from "../components/Surface";
-import Background from "./Background";
-
-// 组件
-import Album from "../components/Album";
-import UserCard from "../components/UserCard";
-import TagCloud from "../components/TagCloud";
-import RandomCard from "../components/RandomCard";
-import RecentlyCard from "../components/RecentlyCard";
-import SiteTotalCard from "../components/SiteTotalCard";
-import ToolBar from "../components/ToolBar";
-import LinkGroup from "../components/LinkGroup";
+import { createLayoutBlocks } from "./layout.blocks";
 import SearchMain from "../components/SearchMain";
+import Background from "./Background";
 
 interface RouteHandle {
   title?: string;
+  layout?: "board" | "other";
 }
 
 export default function Layout() {
   const [mode, setMode] = useState<"board" | "other">("board");
   const [openSearch, setOpenSearch] = useState<boolean>(false);
-
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
-  const firstMount = useRef(true);
-
   const matches = useMatches();
 
+  // 动态标题 | 模式切换
   useEffect(() => {
     const last = [...matches]
       .reverse()
-      .find((m) => (m.handle as RouteHandle | undefined)?.title);
+      .find((m) => m.handle as RouteHandle | undefined);
 
-    console.log("last", last);
+    const handle = last?.handle as RouteHandle | undefined;
 
-    if (last) {
-      document.title = `${(last.handle as RouteHandle | undefined)?.title} - 目之所极`;
+    if (handle?.title) {
+      document.title = `${handle.title} - 目之所极`;
     } else {
       document.title = "目之所极";
     }
+
+    const nextMode = handle?.layout || "board";
+
+    setMode((prev) => {
+      if (prev === nextMode) return prev;
+
+      if (!document.startViewTransition) return nextMode;
+
+      document.startViewTransition(() => {
+        setMode(nextMode);
+      });
+
+      return prev;
+    });
   }, [matches]);
 
-  useEffect(() => {
-    const next = isHomePage ? "board" : "other";
-
-    if (firstMount.current) {
-      firstMount.current = false;
-      setMode(next);
-      return;
-    }
-
-    if (!document.startViewTransition) {
-      setMode(next);
-      return;
-    }
-
-    document.startViewTransition(() => {
-      setMode(next);
-    });
-  }, [isHomePage]);
-
+  // search 开关
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
@@ -92,56 +74,20 @@ export default function Layout() {
     };
   }, []);
 
+  const blocks = createLayoutBlocks({
+    onOpenSearch: () => setOpenSearch(true),
+  });
+
   return (
     <LayoutRoot>
       <Background />
       <Board data-mode={mode}>
-        <Top>
-          <Surface enterOrder={7}>
-            <Album />
-          </Surface>
-        </Top>
-
-        <LeftMiddle>
-          <Surface enterOrder={1} vtName="user-card">
-            <UserCard onOpenSearch={() => setOpenSearch(true)} />
-          </Surface>
-        </LeftMiddle>
-
-        <LeftBottom>
-          <Surface enterOrder={2}>
-            <TagCloud />
-          </Surface>
-        </LeftBottom>
-
+        {blocks.map(({ slot: Slot, node }, i) => (
+          <Slot key={i}>{node}</Slot>
+        ))}
         <MainArea>
           <Outlet />
         </MainArea>
-
-        <RightTop>
-          <Surface enterOrder={6}>
-            <ToolBar />
-          </Surface>
-        </RightTop>
-
-        <RightMiddle>
-          <Surface enterOrder={5}>
-            <RecentlyCard />
-          </Surface>
-        </RightMiddle>
-
-        <RightBottom>
-          <SiteTotalCard />
-          <LinkArea>
-            <LinkGroup />
-          </LinkArea>
-        </RightBottom>
-
-        <Bottom>
-          <Surface enterOrder={3}>
-            <RandomCard />
-          </Surface>
-        </Bottom>
       </Board>
       {openSearch && <SearchMain onCloseSearch={() => setOpenSearch(false)} />}
     </LayoutRoot>
@@ -187,93 +133,4 @@ const MainArea = styled.section`
   [data-mode="other"] & {
     overflow: auto;
   }
-`;
-
-const Top = styled.section`
-  grid-area: top;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 20px;
-
-  [data-mode="other"] & {
-    display: none;
-  }
-`;
-
-const LeftMiddle = styled.aside`
-  grid-area: l1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding-right: 20px;
-
-  [data-mode="other"] & {
-    padding-right: 0;
-  }
-`;
-
-const LeftBottom = styled.aside`
-  grid-area: l2;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-
-  [data-mode="other"] & {
-    display: none;
-  }
-`;
-
-const RightTop = styled.aside`
-  grid-area: r1;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-
-  [data-mode="other"] & {
-    display: none;
-  }
-`;
-
-const RightMiddle = styled.aside`
-  grid-area: r2;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 20px;
-
-  [data-mode="other"] & {
-    display: none;
-  }
-`;
-
-const RightBottom = styled.section`
-  grid-area: r3;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-center;
-  align-items: flex-start;
-  gap: 20px;
-
-  [data-mode="other"] & {
-    display: none;
-  }
-`;
-
-const Bottom = styled.section`
-  grid-area: bottom;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 40px;
-
-  [data-mode="other"] & {
-    display: none;
-  }
-`;
-
-const LinkArea = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
