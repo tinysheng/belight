@@ -1,13 +1,13 @@
 import Surface from "../components/Surface";
 
-import Album from "../components/Album";
-import UserCard from "../components/UserCard";
-import TagCloud from "../components/TagCloud";
-import RandomCard from "../components/RandomCard";
-import RecentlyCard from "../components/RecentlyCard";
-import SiteTotalCard from "../components/SiteTotalCard";
-import ToolBar from "../components/ToolBar";
-import LinkGroup from "../components/LinkGroup";
+import AlbumBlock from "@/components/blocks/AlbumBlock";
+import UserBlock from "@/components/blocks/UserBlock";
+import TagCloudBlock from "@/components/blocks/TagCloudBlock";
+import RandomBlock from "@/components/blocks/RandomBlock";
+import RecentlyBlock from "@/components/blocks/RecentlyBlock";
+import SiteTotalBlock from "@/components/blocks/SiteTotalBlock";
+import ToolBlock from "@/components/blocks/ToolBlock";
+import LinkGroup from "@/components/LinkGroup";
 
 import {
   Top,
@@ -30,7 +30,7 @@ export function createLayoutBlocks({
       slot: Top,
       node: (
         <Surface enterOrder={7}>
-          <Album />
+          <AlbumBlock />
         </Surface>
       ),
     },
@@ -39,7 +39,7 @@ export function createLayoutBlocks({
       slot: LeftMiddle,
       node: (
         <Surface enterOrder={1} vtName="user-card">
-          <UserCard onOpenSearch={onOpenSearch} />
+          <UserBlock onOpenSearch={onOpenSearch} />
         </Surface>
       ),
     },
@@ -48,7 +48,7 @@ export function createLayoutBlocks({
       slot: LeftBottom,
       node: (
         <Surface enterOrder={2}>
-          <TagCloud />
+          <TagCloudBlock />
         </Surface>
       ),
     },
@@ -57,7 +57,7 @@ export function createLayoutBlocks({
       slot: RightTop,
       node: (
         <Surface enterOrder={6}>
-          <ToolBar />
+          <ToolBlock />
         </Surface>
       ),
     },
@@ -66,7 +66,7 @@ export function createLayoutBlocks({
       slot: RightMiddle,
       node: (
         <Surface enterOrder={5}>
-          <RecentlyCard />
+          <RecentlyBlock />
         </Surface>
       ),
     },
@@ -75,7 +75,7 @@ export function createLayoutBlocks({
       slot: RightBottom,
       node: (
         <>
-          <SiteTotalCard />
+          <SiteTotalBlock />
           <LinkArea>
             <LinkGroup />
           </LinkArea>
@@ -87,7 +87,7 @@ export function createLayoutBlocks({
       slot: Bottom,
       node: (
         <Surface enterOrder={3}>
-          <RandomCard />
+          <RandomBlock />
         </Surface>
       ),
     },

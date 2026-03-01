@@ -2,16 +2,27 @@ import styled from "@emotion/styled";
 import OverLay from "../Overlay";
 
 interface SearchMainProps {
+  searchInputRef: React.RefObject<HTMLInputElement>;
   onCloseSearch: () => void;
 }
 
-export default function SearchMain({ onCloseSearch }: SearchMainProps) {
+export default function SearchMain({
+  searchInputRef,
+  onCloseSearch,
+}: SearchMainProps) {
   return (
     <>
       <OverLay onCloseSearch={onCloseSearch} />
       <SearchMainWrapper>
         <SearchForm>
-          <SearchInput type="text" placeholder="搜索" />
+          <SearchInput
+            ref={searchInputRef}
+            onKeyDown={(e) => {
+              e.stopPropagation();
+            }}
+            type="text"
+            placeholder="搜索"
+          />
         </SearchForm>
         {/* 有搜索条件 则显示搜索结果 */}
         <SearchContent />

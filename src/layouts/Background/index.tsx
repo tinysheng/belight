@@ -45,8 +45,8 @@ export default function Background() {
 
 const Wrapper = styled.div`
   position: fixed;
-  z-index: -1;
   inset: 0;
+  z-index: -1;
 
   .cracked-earth {
     width: 100%;

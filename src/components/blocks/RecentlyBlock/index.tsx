@@ -1,16 +1,16 @@
 import styled from "@emotion/styled";
 import Articlelist from "./ArtilcleList";
 
-export default function RecentlyCard() {
+export default function RecentlyBlock() {
   return (
-    <RecentlyCardCantainer>
+    <RecentlyBlockContainer>
       <Title>最近更新</Title>
       <Articlelist />
-    </RecentlyCardCantainer>
+    </RecentlyBlockContainer>
   );
 }
 
-const RecentlyCardCantainer = styled.div`
+const RecentlyBlockContainer = styled.div`
   width: 260px;
   height: 230px;
   padding: 6px;

@@ -1,18 +1,18 @@
 import styled from "@emotion/styled";
 
-export default function RandomCard() {
+export default function RandomBlock() {
   return (
-    <RandomCardContainer>
+    <RandomBlockContainer>
       <Title>随机推荐</Title>
       <Content>
         <p className="text-title">Card title</p>
         <p className="text-body">随机文章是指在文章集合中随机选择的一篇文章。随机文章可以用于多种目的，例如在博客或网站上展示随机的内容，或者在文章集合中随机选择一篇文章进行阅读。</p>
       </Content>
-    </RandomCardContainer>
+    </RandomBlockContainer>
   );
 }
 
-const RandomCardContainer = styled.div`
+const RandomBlockContainer = styled.div`
   width: 240px;
   height: 200px;
   padding: 6px;

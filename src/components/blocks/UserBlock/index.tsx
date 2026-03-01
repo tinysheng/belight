@@ -3,21 +3,21 @@ import LogoWrap from "./LogoWrap";
 import SearchButton from "./SearchButton";
 import Menu from "./Menu";
 
-interface UserCardProps {
+interface UserBlockProps {
   onOpenSearch: () => void;
 }
 
-export default function UserCard({ onOpenSearch }: UserCardProps) {
+export default function UserBlock({ onOpenSearch }: UserBlockProps) {
   return (
-    <UserCardCantainer>
+    <UserBlockCantainer>
       <LogoWrap />
       <SearchButton onOpenSearch={onOpenSearch} />
       <Menu />
-    </UserCardCantainer>
+    </UserBlockCantainer>
   );
 }
 
-const UserCardCantainer = styled.section`
+const UserBlockCantainer = styled.section`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100px 40px 1fr;

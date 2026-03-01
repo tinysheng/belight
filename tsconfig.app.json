@@ -13,7 +13,14 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
+    
     "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
 
     /* Linting */
     "strict": true,
@@ -23,8 +30,4 @@
     "noUncheckedSideEffectImports": true
   },
   "include": ["src"],
-  "baseUrl": "./",
-  "paths": {
-    "@/*": ["src/*"]
-  }
 }

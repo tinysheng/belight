@@ -1,9 +1,13 @@
 import styled from "@emotion/styled";
 
-export default function Aside() {
+interface AsideProps {
+  children: React.ReactNode;
+}
+
+export default function Aside({ children }: AsideProps) {
   return (
     <AsideWrapper>
-      <div>Aside</div>
+      <div>{children}</div>
     </AsideWrapper>
   );
 }
@@ -11,5 +15,10 @@ export default function Aside() {
 const AsideWrapper = styled.aside`
   grid-area: aside;
   display: grid;
-  background: #fafbff;
+
+  > div {
+    min-height: 0;
+    height: 100px;
+    background: #fafbff;
+  }
 `;

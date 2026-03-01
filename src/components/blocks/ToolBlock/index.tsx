@@ -3,21 +3,18 @@ import Search from "./Search";
 import Menu from "./Menu";
 import Clock from "./Clock";
 
-
-export default function ToolBar() {
+export default function ToolBlock() {
   return (
-    <SToolBar>
+    <ToolBlockCantainer>
       {/* <Search />
       <Menu /> */}
       {/* <Clock /> */}
-      <div>
-        tools
-      </div>
-    </SToolBar>
+      <div>tools</div>
+    </ToolBlockCantainer>
   );
 }
 
-const SToolBar = styled.div`
+const ToolBlockCantainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

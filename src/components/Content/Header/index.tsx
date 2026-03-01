@@ -1,9 +1,13 @@
 import styled from "@emotion/styled";
 
-export default function Header() {
+interface HeaderProps {
+  children: React.ReactNode;
+}
+
+export default function Header({children}: HeaderProps) {
   return (
     <HeaderContainer>
-      <h1>Header</h1>
+      <h1>{children}</h1>
     </HeaderContainer>
   );
 }

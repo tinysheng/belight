@@ -4,89 +4,95 @@ export const reset = css`
   *,
   *::before,
   *::after {
-    scroll-behavior: smooth;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
-  
+
   html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-    overflow-x: hidden;
+    scroll-behavior: smooth;
   }
-  
+
   body {
-    min-height: 100vh;
-    font-family: 'SourceHanSans';
-    overflow-x: hidden;
+    font-family: SourceHanSans, system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol", "Noto Color Emoji";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
+  img,
+  picture,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
   ul,
   ol {
     list-style: none;
   }
-  
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p, {
+    font-size: inherit;
+  }
+
   a {
-    display: inline-block;
     color: inherit;
     text-decoration: none;
-    background-color: transparent;
-    cursor: pointer;
   }
-  
-  img,
-  picture,
-  video,
-  canvas,
-  svg {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  input,
+
   button,
+  input,
   textarea,
   select {
     font: inherit;
     color: inherit;
-    background-color: transparent;
-    border: 1px solid transparent;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  input,
+  textarea,
+  select {
+    background: none;
+    border: none;
     outline: none;
   }
-  
-  button {
-    cursor: pointer;
-    padding: 0;
-    appearance: none;
-  }
-  
+
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
-  
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
       animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
   }
   
-  ::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-  }
-  
-  :where([dir='rtl'], [dir='ltr']) {
-    direction: unset;
+  :focus-visible {
+    outline: 2px solid #00ccff88;
+    outline-offset: 2px;
   }
 `;

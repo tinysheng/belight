@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import Surface from "../Surface";
+import Surface from "@/components/Surface";
 
-export default function SiteTotalCard() {
+export default function SiteTotalBlock() {
   const articlesLoaded = true;
   const articleTotal = 100;
   const categoryTotal = 10;
