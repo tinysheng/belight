@@ -3,37 +3,35 @@ import { Link } from "react-router-dom";
 
 export default function LogoWrap() {
   return (
-    <SLogoWrap to="/about">
-      <Avatar>
+    <SLogoWrap>
+      <Avatar to="/about">
         <img
           src="https://free.picui.cn/free/2026/02/20/699834ee30978.jpg"
           alt="avatar"
         />
       </Avatar>
-      <Title>目之所极</Title>
-      <Sub>simple simple simple</Sub>
+      <TitleLink to="/">
+        <Title>目之所极</Title>
+        <Sub>simple simple simple</Sub>
+      </TitleLink>
     </SLogoWrap>
   );
 }
 
-const SLogoWrap = styled(Link)`
-  display: grid;
-  grid-template-columns: 50px 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    "avatar title"
-    "avatar sub";
+const SLogoWrap = styled.section`
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-
-  column-gap: 12px;
-  padding: 10px 20px;
+  padding: 10px 18px;
+  width: 100%;
+  gap: 10px;
 `;
 
-const Avatar = styled.div`
-  grid-area: avatar;
-  width: 54px;
-  height: 54px;
+const Avatar = styled(Link)`
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
+  flex-shrink: 0;
   overflow: hidden;
 
   > img {
@@ -44,23 +42,29 @@ const Avatar = styled.div`
   }
 `;
 
+const TitleLink = styled(Link)`
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  gap: 8px;
+`;
+
 const Title = styled.p`
-  grid-area: title;
-  padding-top: 20px;
   font-size: 16px;
   font-weight: bold;
   color: #333;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
 `;
 
 const Sub = styled.p`
-  grid-area: sub;
-  padding-bottom: 10px;
   font-size: 14px;
   color: #666;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
 `;

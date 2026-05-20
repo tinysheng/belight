@@ -18,10 +18,12 @@ export default function UserBlock({ onOpenSearch }: UserBlockProps) {
 }
 
 const UserBlockCantainer = styled.section`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 100px 40px 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
   width: 260px;
   height: 380px;
-  gap: 8px;
+  gap: 10px;
+  overflow: hidden;
 `;

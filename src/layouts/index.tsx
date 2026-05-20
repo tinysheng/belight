@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { Outlet, useMatches } from "react-router-dom";
 import styled from "@emotion/styled";
 
-import { useSearchHotkey } from "@/hooks/useSearchhotkey";
+import { useSearchHotkey } from "@/hooks/useSearchHotkey";
 
 import { createLayoutBlocks } from "./layout.blocks";
 import SearchMain from "../components/SearchMain";
@@ -17,6 +17,7 @@ export default function Layout() {
   const matches = useMatches();
   const [openSearch, setOpenSearch] = useState<boolean>(false);
   useSearchHotkey(setOpenSearch);
+  
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const blocks = createLayoutBlocks({

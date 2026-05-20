@@ -40,6 +40,7 @@ const SearchButtonWrapper = styled.button`
   align-items: center;
   grid-template-columns: 40px 1fr 60px;
 
+  width: 90%;
   margin: 0 12px;
   padding: 0 6px;
   border: 0.5px solid #0ff8;

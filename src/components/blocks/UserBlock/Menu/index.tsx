@@ -1,17 +1,22 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Menu() {
   const navList = [
     {
       icon: "-",
-      title: "主页",
-      path: "/",
+      title: "文章",
+      path: "/articles",
     },
     {
       icon: "-",
-      title: "文章",
-      path: "/articles",
+      title: "动态",
+      path: "/dynamic",
+    },
+    {
+      icon: "-",
+      title: "友链",
+      path: "/friends",
     },
     {
       icon: "-",
@@ -39,19 +44,27 @@ const MenuCantainer = styled.menu`
   display: grid;
   align-content: start;
   grid-template-columns: 1fr;
-  gap: 8px;
-
+  
+  width: 100%;
   padding: 0 12px;
+  gap: 8px;
 `;
 
-const MenuItem = styled(Link)`
+const MenuItem = styled(NavLink)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 40px;
+  height: 32px;
+  border-radius: 3px;
 
   :hover {
     background-color: #33333322;
+  }
+
+  &.active {
+    background-color: #33333344;
+    color: #000;
+    font-weight: bold;
   }
 
   > i {
