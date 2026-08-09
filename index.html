@@ -1,13 +1,28 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/avatar.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>目之所极</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/svg+xml" href="/avatar.svg" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>目之所极</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.7.0/style.css" />
+	<script>
+		(function () {
+			try {
+				var stored = localStorage.getItem('theme');
+				var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+				var theme = stored || 'system';
+				var resolved = theme === 'system' ? (systemDark ? 'dark' : 'light') : theme;
+				document.documentElement.setAttribute('data-theme', resolved);
+			} catch (e) {}
+		})();
+	</script>
+</head>
+
+<body>
+	<div id="root"></div>
+	<script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

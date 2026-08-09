@@ -1,81 +1,65 @@
-import { lazy, Suspense } from "react";
-import type { RouteObject } from "react-router-dom";
+import { lazy, Suspense } from 'react'
+import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 
-import Layout from "../layouts";
-import Loading from "../components/Loading";
+import BlogLayout from '@/components/layout/BlogLayout'
+import Loading from '@/components/ui/Loading'
 
 // 页面组件
-import Home from "../pages/Home";
-const About = lazy(() => import("../pages/About"));
-const Articles = lazy(() => import("../pages/Articles"));
-const Dynamic = lazy(() => import("../pages/Dynamic"));
-const FriendsLink = lazy(() => import("../pages/FriendsLink"));
-const Archives = lazy(() => import("../pages/Archives"));
+import Home from '@/pages/home'
+const Posts = lazy(() => import('@/pages/posts'))
+const PostDetail = lazy(() => import('@/pages/postdetail'))
+const About = lazy(() => import('@/pages/about'))
+const Archives = lazy(() => import('@/pages/archives'))
+const FriendsLink = lazy(() => import('@/pages/friends'))
+const Dynamic = lazy(() => import('@/pages/dynamic'))
 
-export const routes: RouteObject[] = [
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-        handle: { layout: "board" },
-      },
-      {
-        path: "about",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <About />
-          </Suspense>
-        ),
-        handle: { title: "关于", layout: "other" },
-      },
-      {
-        path: "articles",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Articles />
-          </Suspense>
-        ),
-        handle: { title: "文章", layout: "other" },
-      },
-      {
-        path: "dynamic",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Dynamic />
-          </Suspense>
-        ),
-        handle: { title: "动态", layout: "other" },
-      },
-      {
-        path: "friends",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <FriendsLink />
-          </Suspense>
-        ),
-        handle: { title: "友情链接", layout: "other" },
-      },
-      {
-        path: "archives",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <Archives />
-          </Suspense>
-        ),
-        handle: { title: "归档", layout: "other" },
-      },
-      {
-        path: "*",
-        element: (
-          <Suspense fallback={<Loading />}>
-            <div> 404 Not Found </div>
-          </Suspense>
-        ),
-        handle: { title: "404 Not Found", layout: "other" },
-      },
-    ],
-  },
-];
+const routes: RouteObject[] = [
+	{
+		path: '/',
+		element: <BlogLayout />,
+		children: [
+			{
+				index: true,
+				element: <Home />,
+				handle: { layout: 'board' },
+			},
+			{
+				path: 'posts',
+				children: [
+					{ index: true, element: <Posts />, handle: { title: '文章', layout: 'blog' } },
+					{ path: ':slug', element: <PostDetail />, handle: { title: '文章', layout: 'cont' } },
+				],
+			},
+			{
+				path: 'about',
+				element: <About />,
+				handle: { title: '关于', layout: 'blog' },
+			},
+			{
+				path: 'archives',
+				element: <Archives />,
+				handle: { title: '归档', layout: 'blog' },
+			},
+			{
+				path: 'friends',
+				element: <FriendsLink />,
+				handle: { title: '友链', layout: 'blog' },
+			},
+			{
+				path: 'dynamic',
+				element: <Dynamic />,
+				handle: { title: '动态', layout: 'blog' },
+			},
+		],
+	},
+	{
+		path: '*',
+		element: (
+			<Suspense fallback={<Loading />}>
+				<div> 404 Not Found </div>
+			</Suspense>
+		),
+	},
+]
+
+export const router = createBrowserRouter(routes)
