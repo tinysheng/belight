@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { getPostList } from '@/services/post'
-import type { PostCard } from '@/types/post'
+import type { PostListItem } from '@/types/post'
 
-let cachedPosts: PostCard[] | null = null
-let pendingPromise: Promise<PostCard[]> | null = null
+let cachedPosts: PostListItem[] | null = null
+let pendingPromise: Promise<PostListItem[]> | null = null
 
 export function usePosts() {
-	const [posts, setPosts] = useState<PostCard[]>(cachedPosts ?? [])
+	const [posts, setPosts] = useState<PostListItem[]>(cachedPosts ?? [])
 	const [loading, setLoading] = useState(!cachedPosts)
 	const [error, setError] = useState<string | null>(null)
 

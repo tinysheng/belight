@@ -34,7 +34,7 @@ export default function PostHeader({ post }: PostHeaderProps) {
 							fill="currentColor"
 						/>
 					</svg>
-					<span>{post.category.name}</span>
+					<span>{post.category}</span>
 				</MetaItem>
 				<MetaItem>
 					<svg viewBox="0 0 24 24" width="14" height="14">

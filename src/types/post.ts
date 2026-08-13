@@ -1,38 +1,38 @@
-export interface Tag {
-	name: string
-	slug: string
-}
-
-export interface Category {
-	name: string
-	slug: string
-}
-
-export interface PostCard {
+export interface PostListItem {
 	id: number
 	title: string
 	slug: string
-	cover: string
 	excerpt: string
-
-	category: Category
-	tags: Tag[]
-
-	createdAt: string
+	coverUrl: string
+	topLevel: number
 	views: number
-}
-
-export interface PostDetail extends PostCard {
-	content: string
+	createdAt: string
 	updatedAt: string
+	category: string
+	tags: string[]
 }
 
-export interface ArchiveItem {
+export interface PostDetail extends PostListItem {
+	content: string
+}
+
+export interface ArchiveList {
 	year: number
+	count: number
 	list: {
 		id: number
 		title: string
 		slug: string
 		createdAt: string
+		updatedAt: string
+		category: string
+		tags: string[]
 	}[]
+}
+
+export interface Pagination {
+	page: number
+	limit: number
+	total: number
+	totalPages: number
 }

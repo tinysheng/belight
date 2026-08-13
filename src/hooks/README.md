@@ -28,7 +28,7 @@ let pendingPromise: Promise<PostCard[]> | null = null
 #### 2. 状态声明
 
 | 状态 | 类型 | 初始值 | 说明 |
-|------|------|--------|------|
+| ------ | ------ | -------- | ------ |
 | `posts` | `PostCard[]` | `cachedPosts \|\| []` | 文章列表数据 |
 | `loading` | `boolean` | `!cachedPosts` | 是否正在加载 |
 | `error` | `string \| null` | `null` | 错误信息 |
@@ -113,7 +113,7 @@ function Posts() {
 #### 1. 状态声明
 
 | 状态 | 类型 | 初始值 | 说明 |
-|------|------|--------|------|
+| ------ | ------ | -------- | ------ |
 | `post` | `PostDetail \| null` | `null` | 文章详情数据 |
 | `loading` | `boolean` | `!!slug` | 是否正在加载 |
 | `error` | `string \| null` | `null` | 错误信息 |
@@ -208,7 +208,7 @@ function PostDetail() {
 ## 两个 Hook 的对比
 
 | 特性 | usePosts | usePostDetail |
-|------|----------|---------------|
+| ------ | ---------- | --------------- |
 | 数据范围 | 列表（多篇文章） | 详情（单篇文章） |
 | 缓存策略 | 模块级缓存，跨组件共享 | 无缓存，每次重新获取 |
 | 请求去重 | 支持（pendingPromise） | 不支持（每次独立请求） |

@@ -13,7 +13,7 @@ export default function RandomBlock() {
 	return (
 		<RandomBlockWrapper label="Random Post">
 			<ArticleCard to={`/posts/${article.slug}`}>
-				<CategoryTag>{article.category.name}</CategoryTag>
+				<CategoryTag>{article.category}</CategoryTag>
 				<Title>{article.title}</Title>
 				<Summary>{article.excerpt}</Summary>
 				<DateLine>{article.createdAt}</DateLine>

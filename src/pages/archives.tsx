@@ -1,113 +1,28 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-
-interface ArchiveArticle {
-	id: number
-	date: string
-	title: string
-	tags: string[]
-}
-
-interface ArchiveYear {
-	year: string
-	count: number
-	articles: ArchiveArticle[]
-}
-
-const archiveData: ArchiveYear[] = [
-	{
-		year: '2025',
-		count: 7,
-		articles: [
-			{
-				id: 1,
-				date: '05-28',
-				title: 'React 19 新特性探索',
-				tags: ['React', '前端'],
-			},
-			{
-				id: 2,
-				date: '05-15',
-				title: 'TypeScript 高级类型体操',
-				tags: ['TypeScript'],
-			},
-			{ id: 3, date: '04-20', title: 'Vite 构建优化实践', tags: ['工程化'] },
-			{
-				id: 4,
-				date: '03-12',
-				title: 'Node.js 性能调优指南',
-				tags: ['Node.js', '后端'],
-			},
-			{ id: 5, date: '02-28', title: 'CSS 容器查询入门', tags: ['CSS'] },
-			{ id: 6, date: '02-10', title: 'Docker 部署前端项目', tags: ['DevOps'] },
-			{ id: 7, date: '01-05', title: '2025 年前端趋势展望', tags: ['日常'] },
-		],
-	},
-	{
-		year: '2024',
-		count: 10,
-		articles: [
-			{ id: 8, date: '12-25', title: '年终总结：成长与收获', tags: ['日常'] },
-			{
-				id: 9,
-				date: '12-10',
-				title: 'Next.js 14 App Router 实践',
-				tags: ['Next.js'],
-			},
-			{
-				id: 10,
-				date: '11-18',
-				title: 'WebSocket 实时通信方案',
-				tags: ['网络'],
-			},
-			{ id: 11, date: '10-30', title: '微前端架构设计思路', tags: ['架构'] },
-			{ id: 12, date: '09-15', title: 'Rust 学习笔记', tags: ['Rust'] },
-			{ id: 13, date: '08-22', title: 'GraphQL vs REST 选型', tags: ['API'] },
-			{ id: 14, date: '07-08', title: '前端单元测试最佳实践', tags: ['测试'] },
-			{ id: 15, date: '06-20', title: '浏览器渲染原理详解', tags: ['浏览器'] },
-			{ id: 16, date: '05-01', title: '五一假期旅行日记', tags: ['生活'] },
-			{ id: 17, date: '03-15', title: '从零搭建组件库', tags: ['组件库'] },
-		],
-	},
-	{
-		year: '2023',
-		count: 5,
-		articles: [
-			{ id: 18, date: '11-11', title: '双十一购物清单', tags: ['生活'] },
-			{ id: 19, date: '09-01', title: '开学季新计划', tags: ['日常'] },
-			{
-				id: 20,
-				date: '07-20',
-				title: 'Vue 3 Composition API 心得',
-				tags: ['Vue'],
-			},
-			{
-				id: 21,
-				date: '05-05',
-				title: '前端性能优化 checklist',
-				tags: ['性能'],
-			},
-			{ id: 22, date: '01-01', title: '新年快乐', tags: ['生活'] },
-		],
-	},
-]
+import { useArchives } from '@/hooks/useArchives'
+import Loading from '@/components/ui/Loading'
 
 export default function Archives() {
+	const { archives, loading } = useArchives()
+
+	if (loading && archives.length === 0) return <Loading />
+
 	return (
 		<ArchiveContainer>
-			{archiveData.map((yearGroup) => (
+			{archives.map((yearGroup) => (
 				<ArchiveYearSection key={yearGroup.year}>
 					<ArchiveTitle>
 						<em>{yearGroup.year}</em>
 						<i></i>
 						<span>—— {yearGroup.count}篇文章</span>
 					</ArchiveTitle>
-					{yearGroup.articles.map((article) => (
-						<ArchiveLink key={article.id} to={`/posts/${article.id}`}>
-							<em>{article.date}</em>
+					{yearGroup.list.map((item) => (
+						<ArchiveLink key={item.id} to={`/posts/${item.slug}`}>
+							<em>{item.createdAt}</em>
 							<i></i>
-							<span>{article.title}</span>
-							<cite>{article.tags.map((t) => `#${t}`).join(' ')}</cite>
+							<span>{item.title}</span>
+							<cite>{item.tags.map((t) => `#${t}`).join(' ')}</cite>
 						</ArchiveLink>
 					))}
 				</ArchiveYearSection>

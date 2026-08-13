@@ -27,12 +27,17 @@ apiClient.interceptors.response.use(
 	(response) => {
 		const res = response.data
 
-		// 兼容直接返回数组或对象（无 code 包装）的情况
 		if (res === null || typeof res !== 'object' || Array.isArray(res)) {
 			return res
 		}
 
-		// 有 code 字段时校验
+		if ('success' in res) {
+			if (!res.success) {
+				return Promise.reject(new Error(res.message || '请求失败'))
+			}
+			return res.data ?? res
+		}
+
 		if ('code' in res) {
 			if (res.code !== 0 && res.code !== 200) {
 				return Promise.reject(new Error(res.message || '请求失败'))

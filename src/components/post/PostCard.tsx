@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import type { PostCard as PostCardType } from '@/types/post'
+import type { PostListItem } from '@/types/post'
 
 interface PostCardProps {
-	post: PostCardType
+	post: PostListItem
 }
 
 export default function PostCard({ post }: PostCardProps) {
@@ -28,7 +28,7 @@ export default function PostCard({ post }: PostCardProps) {
 							fill="currentColor"
 						/>
 					</svg>
-					<span>{post.tags.map((t) => t.name).join(', ')}</span>
+					<span>{post.tags.join(', ')}</span>
 				</MetaItem>
 				<MetaItem>
 					<svg viewBox="0 0 24 24" width="14" height="14">
