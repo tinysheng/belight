@@ -1,90 +1,13 @@
 import styled from '@emotion/styled'
 import { useConfig } from '@/hooks/useConfig'
-
-interface FriendLink {
-	name: string
-	desc: string
-	avatar: string
-	url: string
-}
-
-const friendLinks: FriendLink[] = [
-	{
-		name: '项目主页',
-		desc: 'vanBlog',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=1',
-		url: 'https://github.com',
-	},
-	{
-		name: '小帅的技术博客',
-		desc: '拥抱技术，热爱生活',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=2',
-		url: 'https://github.com',
-	},
-	{
-		name: 'Mosu',
-		desc: '淡定的人生从不需要解释',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=3',
-		url: 'https://github.com',
-	},
-	{
-		name: '牵菌的博客',
-		desc: '闲鱼的生活记录',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=4',
-		url: 'https://github.com',
-	},
-	{
-		name: '前端 | 面试进阶',
-		desc: 'whykown助你拿offer',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=5',
-		url: 'https://github.com',
-	},
-	{
-		name: '叶继伟的 blog',
-		desc: '技术、分享、折腾',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=6',
-		url: 'https://github.com',
-	},
-	{
-		name: 'GT的官方博客',
-		desc: '官方自己要发发声',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=7',
-		url: 'https://github.com',
-	},
-	{
-		name: '网络日志',
-		desc: '网络日志 · 一多人与技术的故事',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=8',
-		url: 'https://github.com',
-	},
-	{
-		name: '阿明的小博客',
-		desc: '分享你想要的一切！',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=9',
-		url: 'https://github.com',
-	},
-	{
-		name: '运维笔记',
-		desc: '一个专注运维的网站',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=10',
-		url: 'https://github.com',
-	},
-	{
-		name: '从01开始',
-		desc: '那就从零开始',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=11',
-		url: 'https://github.com',
-	},
-	{
-		name: 'LinKinHan的安全日志',
-		desc: '一起学习交流网络安全',
-		avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=12',
-		url: 'https://github.com',
-	},
-]
+import { useLinks } from '@/hooks/useLinks'
+import Loading from '@/components/ui/Loading'
 
 export default function FriendsLink() {
+	const { links, loading } = useLinks()
 	const { config } = useConfig()
+
+	if (loading && links.length === 0) return <Loading />
 
 	return (
 		<Container>
@@ -92,14 +15,14 @@ export default function FriendsLink() {
 				<SectionTitle>友情链接</SectionTitle>
 				<Tips>以下是本站的友情链接，排名不分先后：</Tips>
 				<Grid>
-					{friendLinks.map((link) => (
-						<Card key={link.name} href={link.url} target="_blank" rel="noreferrer">
+					{links.map((link) => (
+						<Card key={link.id} href={link.link} target="_blank" rel="noreferrer">
 							<Avatar>
-								<img src={link.avatar} alt={link.name} />
+								<img src={link.icon} alt={link.author} />
 							</Avatar>
 							<Info>
-								<strong>{link.name}</strong>
-								<p>{link.desc}</p>
+								<strong>{link.title}</strong>
+								<p>{link.intro}</p>
 							</Info>
 						</Card>
 					))}

@@ -17,7 +17,7 @@ export interface ConfigProps {
 }
 
 export const getConfig = async (): Promise<ConfigProps> => {
-	const res = await get<ConfigProps>('/api/config')
+	const res = await get<ConfigProps>('/config')
 
 	return res
 }
