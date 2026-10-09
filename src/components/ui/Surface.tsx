@@ -19,10 +19,11 @@ export default function Surface({ children, className, enterOrder = 0, label }: 
 const SurfaceWrapper = styled.section<SurfaceProps & { hasLabel: boolean }>`
 	position: relative;
 	padding: 10px;
+	background-color: var(--color-bg-3);
 	border-width: 1px;
 	border-style: dashed;
 	border-color: var(--color-border);
-	border-radius: 3px;
+	border-radius: 7px;
 	opacity: 0;
 	scale: 0.3;
 

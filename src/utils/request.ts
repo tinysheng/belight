@@ -64,17 +64,17 @@ apiClient.interceptors.response.use(
 
 // 请求函数
 export const get = <T = unknown, P = Record<string, unknown>>(url: string, params?: P): Promise<T> => {
-	return apiClient.get(url, { params })
+	return apiClient.get(url, { params }) as unknown as Promise<T>
 }
 
 export const post = <T = unknown, P = Record<string, unknown>>(url: string, data?: P): Promise<T> => {
-	return apiClient.post(url, data)
+	return apiClient.post(url, data) as unknown as Promise<T>
 }
 
 export const put = <T = unknown, P = Record<string, unknown>>(url: string, data?: P): Promise<T> => {
-	return apiClient.put(url, data)
+	return apiClient.put(url, data) as unknown as Promise<T>
 }
 
 export const del = <T = unknown>(url: string): Promise<T> => {
-	return apiClient.delete(url)
+	return apiClient.delete(url) as unknown as Promise<T>
 }

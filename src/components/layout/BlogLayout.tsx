@@ -67,7 +67,7 @@ const Background = styled.div`
 	inset: 5%;
 	z-index: -1;
 
-	background-image: url('https://free.picui.cn/free/2026/08/06/6a74ac5350f08.png');
+	background-image: url('https://free.picui.cn/free/2774/2026/10/07/6ac65c9ea7e81.png');
 	filter: saturate(400%) blur(100px) opacity(0.8);
 
 	html[data-theme='dark'] & {

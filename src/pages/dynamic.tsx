@@ -9,12 +9,12 @@ export default function Dynamic() {
 				status={{
 					id: '1',
 					user: {
-						avatar: 'https://i.pravatar.cc/150?img=3',
-						name: 'Jonty',
+						avatar: 'https://free.picui.cn/free/2025/05/18/68297030ecc47.jpg',
+						name: '一缕光',
 					},
 					createdAt: '2025年02月20日 16:52:44 PM',
 					content: '超炫的黑页：',
-					link: 'https://nobb.cc/item/html/4hack/',
+					link: '/',
 					deviceInfo: '🪟 Windows 11 / 🌐 Google Chrome',
 				}}
 			/>
@@ -22,12 +22,12 @@ export default function Dynamic() {
 				status={{
 					id: '1',
 					user: {
-						avatar: 'https://i.pravatar.cc/150?img=3',
-						name: 'Jonty',
+						avatar: 'https://free.picui.cn/free/2025/05/18/68297030ecc47.jpg',
+						name: '一缕光',
 					},
 					createdAt: '2025年02月20日 16:52:44 PM',
 					content: '超炫的黑页：',
-					link: 'https://nobb.cc/item/html/4hack/',
+					link: '/',
 					deviceInfo: '🪟 Windows 11 / 🌐 Google Chrome',
 				}}
 			/>
